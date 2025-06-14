@@ -7,3 +7,4 @@ biosppy
 neurokit2
 wfdb
 peakutils
+flask_cors
