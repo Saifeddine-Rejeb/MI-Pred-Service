@@ -6,3 +6,4 @@ gunicorn
 biosppy
 neurokit2
 wfdb
+peakutils
