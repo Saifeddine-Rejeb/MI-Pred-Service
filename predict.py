@@ -3,9 +3,15 @@ from flask import Flask, request, jsonify
 from utils import predict_signal
 import json
 from flask_cors import CORS
+import traceback
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/')
+def root():
+    return 'Prediction service is alive', 200
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -23,6 +29,7 @@ def predict():
         prediction = predict_signal(ecg)
         return jsonify({'prediction': int(prediction), 'class': 'MI' if prediction == 1 else 'NORM'}), 200
     except Exception as e:
+        print("Exception during prediction:", traceback.format_exc())  
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
